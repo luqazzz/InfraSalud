@@ -6,6 +6,17 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 
+from dotenv import load_dotenv # Necesitarás instalar python-dotenv
+
+load_dotenv() # Carga las variables del archivo .env
+
+# Cambia la línea de la clave por esto:
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+
+
+
+
 # --- CONFIGURACIÓN ---
 app = Flask(__name__)
 # CORS robusto para permitir llamadas desde Vite (5173)

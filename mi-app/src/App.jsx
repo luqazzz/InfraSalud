@@ -5,7 +5,7 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTim
 import { Camera, Send, Loader2 } from 'lucide-react';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC_zVJFg1IDP4r1zdZmp_dHYxni_tQ4Srw",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY, // Cambio importante aquí
   authDomain: "nuevaapp-df1cd.firebaseapp.com",
   projectId: "nuevaapp-df1cd",
   storageBucket: "nuevaapp-df1cd.firebasestorage.app",
