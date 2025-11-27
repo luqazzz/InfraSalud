@@ -5,33 +5,32 @@ import re
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
+from dotenv import load_dotenv
 
-from dotenv import load_dotenv # Necesitarás instalar python-dotenv
+# Cargar variables de entorno
+load_dotenv()
 
-load_dotenv() # Carga las variables del archivo .env
-
-# Cambia la línea de la clave por esto:
-API_KEY = os.getenv("GEMINI_API_KEY")
-
-
-
-
-
-# --- CONFIGURACIÓN ---
+# CONFIGURACIÓN
 app = Flask(__name__)
-# CORS robusto para permitir llamadas desde Vite (5173)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# CLAVE DE API
-API_KEY = "AIzaSyBN_8SN28frz2Y6_Wm9N4C1YEKPkaviROw"
+# OBTENER CLAVE SEGURA (Si no existe, fallará de forma segura)
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not API_KEY:
+    print("❌ ERROR: No se encontró la variable GEMINI_API_KEY en el archivo .env")
+else:
+    print("✅ API Key cargada correctamente")
+
 genai.configure(api_key=API_KEY)
 
 # Modelo
 model = genai.GenerativeModel('gemini-2.5-flash')
 
-
 @app.route('/analyze', methods=['POST'])
+
 def analyze_report():
+    # ... (el resto de tu código igual que antes) ...
     try:
         data = request.json
         image_data = data.get('image')  # Base64
